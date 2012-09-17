@@ -1,7 +1,7 @@
 require 'configuration/configuration'
 require 'yaml'
 
-class Yaml < Configuration
+class Configuration::Yaml < Configuration
   def load_file(filename)
     @configuration = YAML::load_file filename
   end
