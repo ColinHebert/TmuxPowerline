@@ -16,6 +16,13 @@ class Yaml < Configuration
 
   def get_section(section)
     raise UndefinedSectionError, "Undefined section '#{section}'" unless section_exists?(section)
+    segments = []
+
+    @configuration[section]['segments'].each do |segment|
+      segments << segment
+    end unless @configuration[section]['segments'].nil?
+
+    segments
   end
 
   def get_orientation(section)
