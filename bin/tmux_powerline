@@ -1,0 +1,37 @@
+#!/usr/bin/env ruby
+
+begin
+  unless $LOAD_PATH.include?(File.dirname(__FILE__) + '/../lib')
+    $LOAD_PATH.unshift(File.dirname(__FILE__) + '/../lib')
+  end
+
+  require 'optparse'
+
+  options = {}
+  options[:config_file] = File.expand_path '~/.tmux-powerline'
+
+  optparse = OptionParser.new do |opts|
+    opts.banner << ' section'
+    opts.on('-h', '--help', 'Display this screen') do
+      puts opts
+      exit
+    end
+
+    opts.on('-f', '--file FILE', "Tmux-Powerline configuration file") do |f|
+      options[:config_file] = File.expand_path  f
+    end
+  end
+
+  optparse.parse!
+
+  if ARGV.length != 1
+    puts optparse
+    exit
+  end
+
+  require 'tmuxpowerline'
+
+  #TODO: Create an instance of TmuxPowerline
+  #TODO: Specify a configuration to load
+  #TODO: Get the powerline for one section
+end
