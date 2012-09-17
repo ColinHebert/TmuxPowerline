@@ -26,13 +26,13 @@ class Configuration::Yaml < Configuration
   end
 
   def generate_segment(segment_config)
-    segment_style = generate_style(segment_config['style'])
+    segment_style = generate_style segment_config['style']
     segment = create_segment(segment_config['type'], segment_style)
     segment_config.each do |key, value|
       next if key == 'type' || key == 'style'
 
       begin
-        segment.send key+'=', value
+        segment.send key + '=', value
       rescue NoMethodError => e
         #TODO: Log the exception
         puts e.message
@@ -44,12 +44,12 @@ class Configuration::Yaml < Configuration
   private :generate_segment
 
   def generate_style(style_config)
-    style = create_style(style_config['type'])
+    style = create_style style_config['type']
     style_config.each do |key, value|
       next if key == 'type'
 
       begin
-        style.send key+'=', value
+        style.send key + '=', value
       rescue NoMethodError => e
         #TODO: Log the exception
         puts e.message
