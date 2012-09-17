@@ -6,8 +6,17 @@ class TestYaml < Test::Unit::TestCase
     @configuration.load <<-CONFIG
       section-1:
         orientation: RTL
+        segments: empty
+
       section-2:
-        orientation: RTL
+        segments: empty
+
+      status-right:
+        segments: empty
+
+      status:
+        orientation: LTR
+        segments: empty
       CONFIG
   end
 
@@ -20,5 +29,15 @@ class TestYaml < Test::Unit::TestCase
     assert_raise UndefinedSectionError do
       @configuration.get_section 'fake_section'
     end
+  end
+
+  should "obtain a section orientation if it's defined" do
+    assert_equal Configuration::ORIENTATIONS[:RTL], @configuration.get_orientation('section-1')
+    assert_equal Configuration::ORIENTATIONS[:LTR], @configuration.get_orientation('status')
+  end
+
+  should "define the default section orientation if none has been defined" do
+    assert_equal Configuration::ORIENTATIONS[:LTR], @configuration.get_orientation('section-2')
+    assert_equal Configuration::ORIENTATIONS[:RTL], @configuration.get_orientation('status-right')
   end
 end

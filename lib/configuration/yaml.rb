@@ -17,4 +17,8 @@ class Yaml < Configuration
   def get_section(section)
     raise UndefinedSectionError, "Undefined section '#{section}'" unless section_exists?(section)
   end
+
+  def get_orientation(section)
+    @configuration[section]['orientation'] || super(section)
+  end
 end
