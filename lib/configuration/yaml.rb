@@ -19,9 +19,10 @@ class Configuration::Yaml < Configuration
     segments = []
 
     @configuration[section]['segments'].each do |segment_config|
-      segment = create_segment(segment_config['type'])
+      segment_style = create_style(segment_config['style'])
+      segment = create_segment(segment_config['type'], segment_style)
       segment_config.each do |key, value|
-        next if key == 'type'
+        next if key == 'type' || key == 'style'
 
         begin
           segment.send key+'=', value

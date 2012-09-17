@@ -1,4 +1,5 @@
 require 'segment/segment'
+require 'style/style'
 
 class Configuration
   # Available segment orientations, Left To Right and Right To Left
@@ -22,11 +23,17 @@ class Configuration
     DEFAULT_ORIENTATIONS[section.to_sym] || ORIENTATIONS[:LTR]
   end
 
-  def create_segment(type)
+  def create_segment(type, style)
     require 'segment/' + type
-    Segment::const_get(type.capitalize).new
+    Segment::const_get(type.capitalize).new style
   end
   private :create_segment
+
+  def create_style(style)
+    require 'style/' + style
+    Style::const_get(style.capitalize).new
+  end
+  private :create_style
 end
 
 class UndefinedSectionError < StandardError

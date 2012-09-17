@@ -8,18 +8,23 @@ class TestYaml < Test::Unit::TestCase
         orientation: RTL
         segments:
           - type: empty
+            style: thick
           - type: plain
             max_length: 10
             fake_property: lol
+            style: thin
           - type: empty
+            style: thin
 
       section-2:
         segments:
           - type: empty
+            style: thin
 
       status-right:
         segments:
           - type: empty
+            style: thin
 
       status:
         orientation: LTR
@@ -61,5 +66,10 @@ class TestYaml < Test::Unit::TestCase
 
   should "set automatically the properties for each segment" do
     assert_equal 10, @configuration.get_section('section-1')[1].max_length
+  end
+
+  should "set the segment style" do
+    assert @configuration.get_section('section-1')[0].style.is_a?(Style::Thick)
+    assert @configuration.get_section('section-1')[1].style.is_a?(Style::Thin)
   end
 end
