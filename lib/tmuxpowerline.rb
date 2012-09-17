@@ -1,3 +1,5 @@
+require 'configuration/yaml'
+
 class TmuxPowerline
   def initialize(configuration_loader)
     if configuration_loader.nil?
