@@ -9,6 +9,8 @@ class TestYaml < Test::Unit::TestCase
         segments:
           - type: empty
           - type: plain
+            max_length: 10
+            fake_property: lol
           - type: empty
 
       section-2:
@@ -55,5 +57,9 @@ class TestYaml < Test::Unit::TestCase
   should "generate segments based on the type defined in the configuration" do
     assert @configuration.get_section('section-1')[0].is_a?(Segment::Empty)
     assert @configuration.get_section('section-1')[1].is_a?(Segment::Plain)
+  end
+
+  should "set automatically the properties for each segment" do
+    assert_equal 10, @configuration.get_section('section-1')[1].max_length
   end
 end

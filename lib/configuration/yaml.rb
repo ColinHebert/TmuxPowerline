@@ -18,8 +18,19 @@ class Configuration::Yaml < Configuration
     raise UndefinedSectionError, "Undefined section '#{section}'" unless section_exists?(section)
     segments = []
 
-    @configuration[section]['segments'].each do |segment|
-      segments << create_segment(segment['type'])
+    @configuration[section]['segments'].each do |segment_config|
+      segment = create_segment(segment_config['type'])
+      segment_config.each do |key, value|
+        next if key == 'type'
+
+        begin
+          segment.send key+'=', value
+        rescue NoMethodError => e
+          #TODO: Log the exception
+          puts e.message
+        end
+      end
+      segments << segment
     end unless @configuration[section]['segments'].nil?
 
     segments
