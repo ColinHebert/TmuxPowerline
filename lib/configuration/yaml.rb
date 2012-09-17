@@ -10,8 +10,11 @@ class Yaml < Configuration
     @configuration = YAML::load stream
   end
 
+  def section_exists?(section)
+    !@configuration[section].nil?
+  end
+
   def get_section(section)
-    configuration_section = @configuration[section]
-    raise UndefinedSectionError, "Undefined section '#{section}'" if configuration_section.nil?
+    raise UndefinedSectionError, "Undefined section '#{section}'" unless section_exists?(section)
   end
 end
