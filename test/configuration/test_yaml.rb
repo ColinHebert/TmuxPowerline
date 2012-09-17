@@ -8,23 +8,23 @@ class TestYaml < Test::Unit::TestCase
         orientation: RTL
         segments:
           - type: empty
-            style: thick
+            style: {type: thick, bg_color: green, fg_color: black}
           - type: plain
             max_length: 10
             fake_property: lol
-            style: thin
+            style: {type: thin, fg_color: blue}
           - type: empty
-            style: thin
+            style: {type: thin}
 
       section-2:
         segments:
           - type: empty
-            style: thin
+            style: {type: thin}
 
       status-right:
         segments:
           - type: empty
-            style: thin
+            style: {type: thin}
 
       status:
         orientation: LTR
@@ -71,5 +71,10 @@ class TestYaml < Test::Unit::TestCase
   should "set the segment style" do
     assert @configuration.get_section('section-1')[0].style.is_a?(Style::Thick)
     assert @configuration.get_section('section-1')[1].style.is_a?(Style::Thin)
+  end
+
+  should "set the segment style properties automatically" do
+    assert_equal 'green', @configuration.get_section('section-1')[0].style.bg_color
+    assert_equal 'blue', @configuration.get_section('section-1')[1].style.fg_color
   end
 end
