@@ -1,7 +1,9 @@
 require 'helper'
 
 class TestTmuxPowerline < Test::Unit::TestCase
-  should "probably rename this file and start testing for real" do
-    flunk "hey buddy, you should probably rename this file and start testing for real"
+  should "raise an exception if a configuration loader is given as nil" do
+    assert_raise do
+      TmuxPowerline.new nil
+    end
   end
 end
