@@ -19,23 +19,29 @@ class Configuration::Yaml < Configuration
     segments = []
 
     @configuration[section]['segments'].each do |segment_config|
-      segment_style = generate_style(segment_config['style'])
-      segment = create_segment(segment_config['type'], segment_style)
-      segment_config.each do |key, value|
-        next if key == 'type' || key == 'style'
-
-        begin
-          segment.send key+'=', value
-        rescue NoMethodError => e
-          #TODO: Log the exception
-          puts e.message
-        end
-      end
-      segments << segment
+      segments << generate_segment(segment_config)
     end unless @configuration[section]['segments'].nil?
 
     segments
   end
+
+  def generate_segment(segment_config)
+    segment_style = generate_style(segment_config['style'])
+    segment = create_segment(segment_config['type'], segment_style)
+    segment_config.each do |key, value|
+      next if key == 'type' || key == 'style'
+
+      begin
+        segment.send key+'=', value
+      rescue NoMethodError => e
+        #TODO: Log the exception
+        puts e.message
+      end
+    end
+
+    segment
+  end
+  private :generate_segment
 
   def generate_style(style_config)
     style = create_style(style_config['type'])
