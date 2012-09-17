@@ -19,7 +19,7 @@ class Configuration::Yaml < Configuration
     segments = []
 
     @configuration[section]['segments'].each do |segment|
-      segments << segment
+      segments << create_segment(segment['type'])
     end unless @configuration[section]['segments'].nil?
 
     segments

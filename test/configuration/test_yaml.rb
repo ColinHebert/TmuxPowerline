@@ -7,17 +7,17 @@ class TestYaml < Test::Unit::TestCase
       section-1:
         orientation: RTL
         segments:
-          - segment1: empty
-          - segment2: empty
-          - segment3: empty
+          - type: empty
+          - type: plain
+          - type: empty
 
       section-2:
         segments:
-          - segment1: empty
+          - type: empty
 
       status-right:
         segments:
-          - segment1: empty
+          - type: empty
 
       status:
         orientation: LTR
@@ -50,5 +50,10 @@ class TestYaml < Test::Unit::TestCase
     assert_equal 1, @configuration.get_section('status-right').size
     assert_equal 1, @configuration.get_section('section-2').size
     assert_equal 0, @configuration.get_section('status').size
+  end
+
+  should "generate segments based on the type defined in the configuration" do
+    assert @configuration.get_section('section-1')[0].is_a?(Segment::Empty)
+    assert @configuration.get_section('section-1')[1].is_a?(Segment::Plain)
   end
 end
