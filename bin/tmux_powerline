@@ -31,7 +31,7 @@ begin
 
   require 'tmuxpowerline'
 
-  #TODO: Create an instance of TmuxPowerline
-  #TODO: Specify a configuration to load
+  tmux_powerline = TmuxPowerline.new
+  tmux_powerline.load_config options[:config_file]
   #TODO: Get the powerline for one section
 end
