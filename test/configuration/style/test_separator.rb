@@ -46,7 +46,7 @@ class TestSeparator < Test::Unit::TestCase
     @style.bg_color='black'
     @style.separator_fg_color='blue'
     @style.separator_bg_color='green'
-    @style.simplify
+    @style.flatten Style::Formatting.default
 
     assert_equal '#[fg=blue,bg=black]test #[bg=green]a', @style.format('test')
   end
@@ -57,7 +57,7 @@ class TestSeparator < Test::Unit::TestCase
     @style.bg_color='black'
     @style.separator_fg_color='blue'
     @style.separator_bg_color='green'
-    @style.simplify
+    @style.flatten Style::Formatting.default
 
     assert_equal '#[fg=blue,bg=green]b #[bg=black]test', @style.format('test')
   end

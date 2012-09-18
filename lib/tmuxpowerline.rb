@@ -1,4 +1,5 @@
 require 'configuration/yaml'
+require 'style/style'
 
 class TmuxPowerline
   def initialize(configuration_loader=Configuration::Yaml.new)
@@ -15,10 +16,11 @@ class TmuxPowerline
   def get(section)
     segments = @configuration_loader.get_section section
     returned_value = ''
+    current_formatting = Style::Formatting.default
 
     segments.each do |segment|
       next unless segment.displayed?
-      segment.style.simplify
+      segment.style.flatten current_formatting
       returned_value << segment
     end
 

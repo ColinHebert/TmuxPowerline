@@ -6,7 +6,8 @@ class Style
     @formatting = Style::Formatting.new
   end
 
-  def simplify
+  def flatten(current_formatting)
+    @formatting.flatten current_formatting
   end
 
   def format(content)
@@ -30,9 +31,19 @@ class Style
       @bg_color = bg_color
     end
 
-    def simplify(previous_formatting)
-      @fg_color = nil if @fg_color == previous_formatting.fg_color
-      @bg_color = nil if @bg_color == previous_formatting.bg_color
+    def flatten(current_formatting)
+      @fg_color = nil if @fg_color == current_formatting.fg_color
+      @bg_color = nil if @bg_color == current_formatting.bg_color
+
+      current_formatting.fg_color = @fg_color unless @fg_color.nil?
+      current_formatting.bg_color = @bg_color unless @bg_color.nil?
+    end
+
+    def self.default
+      formatting = Style::Formatting.new
+      formatting.bg_color='default'
+      formatting.fg_color='default'
+      formatting
     end
 
     def to_str

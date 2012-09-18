@@ -12,11 +12,13 @@ class Style::Separator < Style
     @separator_formatting = Style::Formatting.new
   end
 
-  def simplify
+  def flatten(current_formatting)
     if @orientation == Configuration::ORIENTATIONS[:LTR]
-      @separator_formatting.simplify @formatting
+      @formatting.flatten current_formatting
+      @separator_formatting.flatten current_formatting
     elsif @orientation == Configuration::ORIENTATIONS[:RTL]
-      @formatting.simplify @separator_formatting
+      @separator_formatting.flatten current_formatting
+      @formatting.flatten current_formatting
     end
   end
 
