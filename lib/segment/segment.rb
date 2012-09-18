@@ -19,10 +19,6 @@ class Segment
     @style.format content[0..@max_length]
   end
 
-  def orientation
-    @style.orientation
-  end
-
   def orientation=(value)
     @style.orientation = value
   end

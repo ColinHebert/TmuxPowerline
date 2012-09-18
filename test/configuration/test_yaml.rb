@@ -111,8 +111,8 @@ class TestYaml < Test::Unit::TestCase
 
   should "define the orientation on each segments" do
     assert_equal Configuration::ORIENTATIONS[:LTR],
-                 @configuration.get_section('segment-with-default-orientation')[0].orientation
+                 @configuration.get_section('segment-with-default-orientation')[0].style.orientation
     assert_equal Configuration::ORIENTATIONS[:LTR],
-                 @configuration.get_section('segment-with-custom-orientation')[0].orientation
+                 @configuration.get_section('segment-with-custom-orientation')[0].style.orientation
   end
 end
