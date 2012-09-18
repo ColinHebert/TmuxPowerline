@@ -35,5 +35,5 @@ begin
 
   tmux_powerline = TmuxPowerline.new
   tmux_powerline.load_config options[:config_file]
-  tmux_powerline.get section
+  puts tmux_powerline.get(section)
 end
