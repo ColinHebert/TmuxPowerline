@@ -22,4 +22,22 @@ class TestSeparator < Test::Unit::TestCase
     @style.orientation=Configuration::ORIENTATIONS[:RTL]
     assert_equal 'a test', @style.format('test')
   end
+
+  should "format the content" do
+    @style.fg_color='blue'
+    @style.bg_color='green'
+    assert_equal '#[fg=blue,bg=green]test a', @style.format('test')
+
+    @style.orientation=Configuration::ORIENTATIONS[:RTL]
+    assert_equal 'b #[fg=blue,bg=green]test', @style.format('test')
+  end
+
+  should "format the separator" do
+    @style.separator_fg_color='blue'
+    @style.separator_bg_color='green'
+    assert_equal 'test #[fg=blue,bg=green]a', @style.format('test')
+
+    @style.orientation=Configuration::ORIENTATIONS[:RTL]
+    assert_equal '#[fg=blue,bg=green]b test', @style.format('test')
+  end
 end
