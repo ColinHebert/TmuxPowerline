@@ -13,5 +13,15 @@ class TmuxPowerline
   end
 
   def get(section)
+    segments = @configuration_loader.get_section section
+    returned_value = ''
+
+    segments.each do |segment|
+      next unless segment.displayed?
+      segment.style.simplify
+      returned_value << segment
+    end
+
+    returned_value
   end
 end

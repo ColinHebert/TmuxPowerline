@@ -14,6 +14,10 @@ class Segment
     false
   end
 
+  def to_str
+    @style.format content
+  end
+
   def orientation
     @style.orientation
   end
