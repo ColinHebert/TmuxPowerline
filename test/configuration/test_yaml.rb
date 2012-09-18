@@ -105,8 +105,8 @@ class TestYaml < Test::Unit::TestCase
   end
 
   should "set the segment style properties automatically" do
-    assert_equal 'green', @configuration.get_section('style-properties')[0].style.bg_color
-    assert_equal 'blue', @configuration.get_section('style-properties')[0].style.fg_color
+    assert_equal 'green', @configuration.get_section('style-properties')[0].style.formatting.bg_color
+    assert_equal 'blue', @configuration.get_section('style-properties')[0].style.formatting.fg_color
   end
 
   should "define the orientation on each segments" do
