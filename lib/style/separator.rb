@@ -5,7 +5,7 @@ class Style::Separator < Style
   attr_accessor :separator_rtl
   attr_reader :separator_formatting
 
-  def initialize(separator, separator_rtl = separator)
+  def initialize(separator = '', separator_rtl = separator)
     super()
     @separator_ltr = separator
     @separator_rtl = separator_rtl
@@ -31,6 +31,10 @@ class Style::Separator < Style
       '' + @separator_formatting + separator_rtl + ' ' +
           @formatting + content
     end
+  end
+
+  def separator=(value)
+    @separator_ltr = @separator_rtl = value
   end
 
   def separator_fg_color=(value)
