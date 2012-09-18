@@ -48,6 +48,19 @@ class TestYaml < Test::Unit::TestCase
         segments:
           - type: empty
             style: {type: thick, bg_color: green, fg_color: blue}
+
+      segment-with-default-orientation:
+        orientation: LTR
+        segments:
+          - type: empty
+            style: {type: thin}
+
+      segment-with-custom-orientation:
+        orientation: RTL
+        segments:
+          - type: empty
+            style: {type: thin}
+            orientation: LTR
     CONFIG
   end
 
@@ -94,5 +107,12 @@ class TestYaml < Test::Unit::TestCase
   should "set the segment style properties automatically" do
     assert_equal 'green', @configuration.get_section('style-properties')[0].style.bg_color
     assert_equal 'blue', @configuration.get_section('style-properties')[0].style.fg_color
+  end
+
+  should "define the orientation on each segments" do
+    assert_equal Configuration::ORIENTATIONS[:LTR],
+                 @configuration.get_section('segment-with-default-orientation')[0].orientation
+    assert_equal Configuration::ORIENTATIONS[:LTR],
+                 @configuration.get_section('segment-with-custom-orientation')[0].orientation
   end
 end

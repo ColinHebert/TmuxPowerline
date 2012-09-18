@@ -1,5 +1,6 @@
 class Segment
   attr_accessor :max_length
+  attr_accessor :orientation
   attr_reader :style
 
   def initialize(style)

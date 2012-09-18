@@ -28,20 +28,21 @@ class Configuration::Yaml < Configuration
 
   def get_section(section)
     raise UndefinedSectionError, "Undefined section '#{section}'" unless section_exists?(section)
+    default_orientation = get_orientation section
     segments = []
 
     @configuration[section]['segments'].each do |segment_config|
-      segments << generate_segment(segment_config)
+      segments << generate_segment(segment_config, default_orientation)
     end unless @configuration[section]['segments'].nil?
 
     segments
   end
 
-  def generate_segment(segment_config)
+  def generate_segment(segment_config, default_orientation)
     segment_style = generate_style segment_config['style']
     segment = create_segment(segment_config['type'], segment_style)
     segment_config.each do |key, value|
-      next if key == 'type' || key == 'style'
+      next if key == 'type' || key == 'style' || key == 'orientation'
 
       begin
         segment.send key + '=', value
@@ -50,6 +51,7 @@ class Configuration::Yaml < Configuration
         puts e.message
       end
     end
+    segment.orientation = ORIENTATIONS[segment_config['orientation']] || default_orientation
 
     segment
   end
