@@ -40,4 +40,25 @@ class TestSeparator < Test::Unit::TestCase
     @style.orientation=Configuration::ORIENTATIONS[:RTL]
     assert_equal '#[fg=blue,bg=green]b test', @style.format('test')
   end
+
+  should "simplify the format in left to right" do
+    @style.fg_color='blue'
+    @style.bg_color='black'
+    @style.separator_fg_color='blue'
+    @style.separator_bg_color='green'
+    @style.simplify
+
+    assert_equal '#[fg=blue,bg=black]test #[bg=green]a', @style.format('test')
+  end
+
+  should "simplify the format in right to left" do
+    @style.orientation=Configuration::ORIENTATIONS[:RTL]
+    @style.fg_color='blue'
+    @style.bg_color='black'
+    @style.separator_fg_color='blue'
+    @style.separator_bg_color='green'
+    @style.simplify
+
+    assert_equal '#[fg=blue,bg=green]b #[bg=black]test', @style.format('test')
+  end
 end

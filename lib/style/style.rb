@@ -3,6 +3,9 @@ class Style
   attr_accessor :bg_color
   attr_accessor :orientation
 
+  def simplify
+  end
+
   def format(content)
     raise NotImplementedError, 'Not yet implemented'
   end
