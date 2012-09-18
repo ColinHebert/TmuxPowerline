@@ -4,6 +4,10 @@ require 'style/style'
 class Configuration
   # Available segment orientations, Left To Right and Right To Left
   ORIENTATIONS = {:LTR => "LTR", :RTL => "RTL"}
+  def ORIENTATIONS.[](index)
+    index = index.upcase.to_sym if index.is_a?(String)
+    super(index)
+  end
 
   # Default orientation for each supported section
   DEFAULT_ORIENTATIONS = {:'status-left' => ORIENTATIONS[:LTR],

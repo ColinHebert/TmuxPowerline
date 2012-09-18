@@ -73,6 +73,6 @@ class Configuration::Yaml < Configuration
   private :generate_style
 
   def get_orientation(section)
-    @configuration[section]['orientation'] || super(section)
+    ORIENTATIONS[@configuration[section]['orientation']] || super(section)
   end
 end
