@@ -1,6 +1,5 @@
 class Segment
   attr_accessor :max_length
-  attr_accessor :orientation
   attr_reader :style
 
   def initialize(style)
@@ -13,5 +12,13 @@ class Segment
 
   def displayed?
     false
+  end
+
+  def orientation
+    @style.orientation
+  end
+
+  def orientation=(value)
+    @style.orientation = value
   end
 end
