@@ -4,6 +4,7 @@ class Segment
 
   def initialize(style)
     @style = style
+    @max_length = -1
   end
 
   def content
@@ -15,7 +16,7 @@ class Segment
   end
 
   def to_str
-    @style.format content
+    @style.format content[0..@max_length]
   end
 
   def orientation
