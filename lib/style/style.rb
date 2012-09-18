@@ -19,6 +19,7 @@ class Style
     if bg_color && !bg_color.empty?
       formatting << "," if formatting_changed
       formatting << "bg="+bg_color
+      formatting_changed = true
     end
 
     formatting << "]"
