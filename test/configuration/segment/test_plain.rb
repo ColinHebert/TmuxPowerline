@@ -12,4 +12,12 @@ class TestPlain < Test::Unit::TestCase
     @segment.content='new-content'
     assert_equal 'new-content', @segment.content
   end
+
+  should "be displayed if it isn't empty" do
+    assert @segment.displayed?
+    @segment.content=''
+    assert !@segment.displayed?
+    @segment.content=nil
+    assert !@segment.displayed?
+  end
 end

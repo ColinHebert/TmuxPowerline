@@ -4,4 +4,8 @@ class Segment::Empty < Segment
   def content
     ''
   end
+
+  def displayed?
+    true
+  end
 end

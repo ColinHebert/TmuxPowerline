@@ -9,4 +9,8 @@ class Segment
   def content
     raise NotImplementedError, 'Not yet implemented'
   end
+
+  def displayed?
+    false
+  end
 end

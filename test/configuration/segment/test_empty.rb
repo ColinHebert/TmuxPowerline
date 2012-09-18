@@ -9,4 +9,8 @@ class TestEmpty < Test::Unit::TestCase
   should "always be empty" do
     assert @segment.content.empty?
   end
+
+  should "always be displayed" do
+    assert @segment.displayed?
+  end
 end
