@@ -2,13 +2,26 @@ require 'configuration/configuration'
 require 'yaml'
 
 class Configuration::Yaml < Configuration
+  def load_config(config)
+    YAML::load config
+    if config.is_a?(String) && File::exist?(config)
+      load_file config
+    elsif config.is_a?(String) || config.is_a?(IO)
+      load_stream config
+    else
+      raise TypeError, "'"+ config.class.to_s + "' isn't a supported configuration type for Yaml"
+    end
+  end
+
   def load_file(filename)
     @configuration = YAML::load_file filename
   end
+  private :load_file
 
-  def load(stream)
+  def load_stream(stream)
     @configuration = YAML::load stream
   end
+  private :load_stream
 
   def section_exists?(section)
     !@configuration[section].nil?

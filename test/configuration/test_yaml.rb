@@ -3,7 +3,7 @@ require 'helper'
 class TestYaml < Test::Unit::TestCase
   setup do
     @configuration=Configuration::Yaml.new
-    @configuration.load <<-CONFIG
+    @configuration.load_config <<-CONFIG
       section-1:
         orientation: RTL
         segments:

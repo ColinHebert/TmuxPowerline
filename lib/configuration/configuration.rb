@@ -11,6 +11,10 @@ class Configuration
                           :'status' => ORIENTATIONS[:LTR],
                           :'status-current' => ORIENTATIONS[:LTR]}
 
+  def load_config(config)
+    raise NotImplementedError, 'Not yet implemented'
+  end
+
   def section_exists?(section)
     raise NotImplementedError, 'Not yet implemented'
   end
