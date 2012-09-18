@@ -25,10 +25,10 @@ class Style::Separator < Style
   def format(content)
     if @orientation == Configuration::ORIENTATIONS[:LTR]
       '' + @formatting + content +
-          ' ' + @separator_formatting + separator_ltr
+          @separator_formatting + separator_ltr
 
     elsif @orientation == Configuration::ORIENTATIONS[:RTL]
-      '' + @separator_formatting + separator_rtl + ' ' +
+      '' + @separator_formatting + separator_rtl +
           @formatting + content
     end
   end

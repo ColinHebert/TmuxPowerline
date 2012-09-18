@@ -3,6 +3,6 @@ require 'style/separator'
 
 class Style::Thin < Style::Separator
   def initialize
-    super '⮁', '⮃'
+    super ' ⮁', '⮃ '
   end
 end
