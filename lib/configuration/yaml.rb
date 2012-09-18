@@ -3,7 +3,6 @@ require 'yaml'
 
 class Configuration::Yaml < Configuration
   def load_config(config)
-    YAML::load config
     if config.is_a?(String) && File::exist?(config)
       load_file config
     elsif config.is_a?(String) || config.is_a?(IO)
