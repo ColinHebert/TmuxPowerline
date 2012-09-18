@@ -18,7 +18,7 @@ begin
     end
 
     opts.on('-f', '--file FILE', "Tmux-Powerline configuration file") do |f|
-      options[:config_file] = File.expand_path  f
+      options[:config_file] = File.expand_path f
     end
   end
 
@@ -27,11 +27,13 @@ begin
   if ARGV.length != 1
     puts optparse
     exit
+  else
+    section = ARGV[0]
   end
 
   require 'tmuxpowerline'
 
   tmux_powerline = TmuxPowerline.new
   tmux_powerline.load_config options[:config_file]
-  #TODO: Get the powerline for one section
+  tmux_powerline.get section
 end

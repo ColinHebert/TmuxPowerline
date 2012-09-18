@@ -9,6 +9,9 @@ class TmuxPowerline
   end
 
   def load_config(config)
-    @configuration_loader.load_config(config)
+    @configuration_loader.load_config config
+  end
+
+  def get(section)
   end
 end
