@@ -7,7 +7,7 @@ class Style::Thick < Style::Separator
   end
 
   def flatten(current_formatting)
-    @separator_formatting.fg_color ||= @formatting.bg_color
+    @separator_formatting.fg_color ||= @formatting.bg_color || current_formatting.bg_color
     @formatting.bg_color ||= @separator_formatting.fg_color
     super
   end
