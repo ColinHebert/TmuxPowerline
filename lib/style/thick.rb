@@ -12,7 +12,7 @@ class Style::Thick < Style::Separator
     super
   end
 
-  def transition(transition_color)
+  def transition=(transition_color)
     @separator_formatting.bg_color = transition_color
   end
 end
