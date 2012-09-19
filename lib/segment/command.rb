@@ -9,7 +9,6 @@ class Segment::Command < Segment
 
   def content
     if @result.nil?
-      puts @command
       @result = `#@command`.chomp
     end
     @result
