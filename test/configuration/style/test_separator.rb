@@ -3,7 +3,7 @@ require 'style/separator'
 
 class TestSeparator < Test::Unit::TestCase
   setup do
-    @style = Style::Separator.new 'a', 'b'
+    @style = Style::Separator.new ' a', 'b '
     @style.orientation=Configuration::ORIENTATIONS[:LTR]
   end
 
@@ -17,10 +17,10 @@ class TestSeparator < Test::Unit::TestCase
   should "use only one separator if only ltr has been provided" do
     @style = Style::Separator.new 'a'
     @style.orientation=Configuration::ORIENTATIONS[:LTR]
-    assert_equal 'test a', @style.format('test')
+    assert_equal 'testa', @style.format('test')
 
     @style.orientation=Configuration::ORIENTATIONS[:RTL]
-    assert_equal 'a test', @style.format('test')
+    assert_equal 'atest', @style.format('test')
   end
 
   should "format the content" do
@@ -35,7 +35,7 @@ class TestSeparator < Test::Unit::TestCase
   should "format the separator" do
     @style.separator_fg_color='blue'
     @style.separator_bg_color='green'
-    assert_equal 'test #[fg=blue,bg=green]a', @style.format('test')
+    assert_equal 'test#[fg=blue,bg=green] a', @style.format('test')
 
     @style.orientation=Configuration::ORIENTATIONS[:RTL]
     assert_equal '#[fg=blue,bg=green]b test', @style.format('test')
@@ -48,7 +48,7 @@ class TestSeparator < Test::Unit::TestCase
     @style.separator_bg_color='green'
     @style.flatten Style::Formatting.default
 
-    assert_equal '#[fg=blue,bg=black]test #[bg=green]a', @style.format('test')
+    assert_equal '#[fg=blue,bg=black]test#[bg=green] a', @style.format('test')
   end
 
   should "simplify the format in right to left" do
